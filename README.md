@@ -1,15 +1,10 @@
 # Spatio-Temporal Correlation Between Precipitation and Vegetation Dynamics in the Brazil-Cerrado Region
 
-A [ClimateMatch Academy](https://comptools.climatematch.io/) project (Lagoda Pod) investigating
-whether changes in precipitation frequency across Brazil's Cerrado biome (2001-2024) spatially
+A project investigating whether changes in precipitation frequency across Brazil's Cerrado biome (2001-2024) spatially
 correlate with vegetation health (NDVI).
 
 **Team:** Alex Adams, Isaac Yameogo, Joshua Solomon Avong, Julio Montenegro Gambini, Moses Kolleh
-Sesay. Mentored by Danny McCulloch (TA). See [`CMA_Project_Presentation_Logada_Precipitation.pdf`](./CMA_Project_Presentation_Logada_Precipitation.pdf)
-for the team's original presentation and full findings.
-
-This repo contains a standalone, locally-runnable rebuild of the project's data pipeline
-(originally built across several Colab notebooks), written by Alex Adams.
+Sesay. Mentored by Danny McCulloch (TA).
 
 ## Research question
 
@@ -46,15 +41,11 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-Earth Engine project ID is set via the `EE_PROJECT` constant near the top of `ndvi_monthly.py`
-and `ndvi_snapshot.py` — replace `"climatematch-cerrado"` with your own registered project ID.
-The first run of `ee.Authenticate()` opens a browser sign-in; credentials are cached after that.
-
 ## Running it
 
 ```bash
 python precipitation_download.py   # stage 1
-python ndvi_monthly.py             # stage 2 — slow; ~288 Earth Engine requests
+python ndvi_monthly.py             # stage 2
 python ndvi_stitch.py              # stage 3
 python analysis_correlation.py     # stage 4
 python analysis_trends.py          # stage 5
@@ -100,8 +91,6 @@ rainfall change.
 - **Cerrado boundary:** [TerraBrasilis](https://terrabrasilis.dpi.inpe.br/), INPE.
 
 ## Possible next steps
-
-From the team's original "Future Context" findings:
 
 - Zonal analysis by land cover (natural vs. anthropogenic greening)
 - Classify zones where NDVI is stable/increasing despite declining precipitation (climate
