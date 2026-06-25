@@ -1,0 +1,13 @@
+xarray
+rioxarray
+zarr
+s3fs
+geopandas
+requests
+netCDF4
+dask
+earthengine-api
+geemap
+rasterio
+matplotlib
+scipy

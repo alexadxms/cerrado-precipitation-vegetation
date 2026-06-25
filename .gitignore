@@ -1,0 +1,17 @@
+# Python environment
+.venv/
+__pycache__/
+*.pyc
+
+# Downloaded / generated data (large, regeneratable by running the scripts)
+*.nc
+*.tif
+cerrado_shapefile/
+ndvi_monthly_cache/
+chirps_cache/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
