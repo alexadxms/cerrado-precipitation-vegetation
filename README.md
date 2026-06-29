@@ -2,8 +2,6 @@
 
 > Does vegetation health in Brazil's Cerrado biome respond to rainfall immediately, or with a delay? A 24-year precipitation/NDVI pipeline rebuilt to run locally end-to-end.
 
-**Team:** Alex Adams, Isaac Yameogo, Joshua Solomon Avong, Julio Montenegro Gambini, Moses Kolleh Sesay. Mentored by Danny McCulloch (TA). A [ClimateMatch Academy](https://comptools.climatematch.io/) project (Lagoda Pod) — see [`CMA_Project_Presentation_Logada_Precipitation.pdf`](./CMA_Project_Presentation_Logada_Precipitation.pdf) for the team's original presentation. This repo is a standalone, locally-runnable rebuild of the team's data pipeline (originally built across several Colab notebooks), written by Alex Adams.
-
 ---
 
 ## Overview
@@ -23,7 +21,7 @@ Scientific evidence suggests vegetation dynamics can alter regional climate by d
 
 **Hypothesis:** A decrease in precipitation frequency in the Cerrado between 2001-2024 will show a strong positive spatial correlation with a decline in vegetation health.
 
-Empirical studies systematically linking precipitation change to spatial patterns of vegetation health remain limited, despite the Cerrado facing both rising extreme-rainfall events and rapid forest loss over the past 20 years.
+Empirical studies systematically linking precipitation change to spatial patterns of vegetation health remain limited, despite the Cerrado experiencing both rising extreme rainfall events and rapid forest loss over the past 20 years.
 
 ---
 
@@ -70,7 +68,7 @@ Five stages, each a standalone script. Run in order — each depends on the prev
 
 ![Lag correlation maps](./lag_correlation_maps.png)
 
-This matches the ecological-memory interpretation from the team's original analysis: the biome's vegetation relies on stored soil moisture rather than reacting to rainfall immediately, so the strongest positive vegetation response shows up 3-4 months after the rain that caused it.
+This matches the ecological-memory interpretation from the team's original analysis: the biome's vegetation relies on stored soil moisture rather than reacting to rainfall immediately, so the strongest positive vegetation response appears 3-4 months after the rain that triggered it.
 
 **Trends vary by month and aren't always coupled.** Per-pixel Sen's slope trends (2001-2024), computed separately for each calendar month:
 
@@ -111,25 +109,6 @@ Stage 2 is resumable — already-downloaded months are skipped, so it's safe to 
 
 ---
 
-## Project Structure
-
-```
-cerrado-precipitation-vegetation/
-├── precipitation_download.py    # stage 1
-├── ndvi_monthly.py               # stage 2
-├── ndvi_stitch.py                # stage 3
-├── analysis_correlation.py       # stage 4
-├── analysis_trends.py            # stage 5
-├── ndvi_snapshot.py              # standalone Earth Engine access check
-├── requirements.txt
-├── CMA_Project_Presentation_Logada_Precipitation.pdf
-└── README.md
-```
-
-(`.venv/`, cached CHIRPS/NDVI `.nc` files, the 288 monthly GeoTIFFs, the downloaded shapefile, and run logs are gitignored — regenerate them by running the stages above.)
-
----
-
 ## What I Learned
 
 The original Colab notebooks referenced a precipitation source (`s3://chirps-zarr/...`) that turned out not to exist as a public bucket — confirmed directly via `s3fs` (`NoSuchBucket`), not just a typo. Rebuilding stage 1 meant finding the actual official CHIRPS distribution (UCSB's HTTPS server, yearly NetCDF files) and substituting it. The same rebuild also surfaced a second, more dangerous bug: the original latitude slice assumed descending order, but CHIRPS stores latitude ascending — this fails silently (an empty array, no error) rather than crashing, which is the kind of bug that's easy to ship without noticing.
@@ -144,5 +123,3 @@ On the Earth Engine side, exporting NDVI clipped to the full-resolution Cerrado 
 - TerraBrasilis, INPE — Cerrado biome boundary shapefile.
 
 ---
-
-*Alex Adams · [alex.adxms@icloud.com](mailto:alex.adxms@icloud.com) · [LinkedIn](https://www.linkedin.com/in/alex-adxms/)*
