@@ -31,7 +31,7 @@ Empirical studies systematically linking precipitation change to spatial pattern
 
 ### Approach
 
-Five stages, each a standalone script. Run in order — each depends on the previous stage's output.
+Five stages, each a standalone script. Run in order: each depends on the previous stage's output.
 
 | Stage | Script | What it does |
 |---|---|---|
