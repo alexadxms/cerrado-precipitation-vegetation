@@ -66,14 +66,14 @@ Five stages, each a standalone script. Run in order — each depends on the prev
 |---|---|---|---|---|---|
 | Mean correlation (r) | -0.66 | -0.21 | +0.11 | +0.41 | +0.58 |
 
-![Lag correlation maps](./lag_correlation_maps.png)
+![Lag correlation maps](outputs/lag_correlation_maps.png)
 
 This matches the ecological-memory interpretation from the team's original analysis: the biome's vegetation relies on stored soil moisture rather than reacting to rainfall immediately, so the strongest positive vegetation response appears 3-4 months after the rain that triggered it.
 
 **Trends vary by month and aren't always coupled.** Per-pixel Sen's slope trends (2001-2024), computed separately for each calendar month:
 
-![NDVI trend maps](./ndvi_trend_maps.png)
-![Precipitation trend maps](./precip_trend_maps.png)
+![NDVI trend maps](outputs/ndvi_trend_maps.png)
+![Precipitation trend maps](outputs/precip_trend_maps.png)
 
 January stands out: precipitation is declining there while NDVI is increasing — a vegetation adaptation or land-use signal rather than a simple rainfall-driven response. June-August show a comparatively flat precipitation trend (dry season), consistent with the original team's observation that NDVI decline in that period reflects degradation/fire activity rather than rainfall change.
 

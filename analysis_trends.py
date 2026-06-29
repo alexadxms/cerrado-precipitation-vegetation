@@ -11,6 +11,7 @@ Run locally with:
 """
 
 import calendar
+import os
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -19,7 +20,10 @@ from scipy.stats import theilslopes
 
 PRECIP_PATH = "chirps_cerrado_2001-2024.nc"
 NDVI_PATH = "ndvi_cerrado_monthly.nc"
+OUTPUT_DIR = "outputs"
 OUTPUT_NC = "trend_maps.nc"
+
+os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 # --- Load and align (same approach as analysis_correlation.py) ---
 precip_daily = xr.open_dataset(PRECIP_PATH).precip
@@ -86,8 +90,8 @@ for month in range(1, 13):
 
 # --- Plot: 12-panel grids ---
 for var, title, fname in [
-    (ndvi_trend, "Monthly NDVI trends (Sen's slope)", "ndvi_trend_maps.png"),
-    (precip_trend, "Monthly precipitation trends (Sen's slope)", "precip_trend_maps.png"),
+    (ndvi_trend, "Monthly NDVI trends (Sen's slope)", os.path.join(OUTPUT_DIR, "ndvi_trend_maps.png")),
+    (precip_trend, "Monthly precipitation trends (Sen's slope)", os.path.join(OUTPUT_DIR, "precip_trend_maps.png")),
 ]:
     fig, axes = plt.subplots(3, 4, figsize=(13, 9))
     vmax = float(np.nanpercentile(np.abs(var.values), 95))

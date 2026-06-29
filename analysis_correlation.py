@@ -11,6 +11,8 @@ Run locally with:
     python analysis_correlation.py
 """
 
+import os
+
 import matplotlib.pyplot as plt
 import numpy as np
 import xarray as xr
@@ -18,8 +20,11 @@ import xarray as xr
 PRECIP_PATH = "chirps_cerrado_2001-2024.nc"
 NDVI_PATH = "ndvi_cerrado_monthly.nc"
 MAX_LAG_MONTHS = 4
+OUTPUT_DIR = "outputs"
 OUTPUT_NC = "lag_correlation_maps.nc"
-OUTPUT_PNG = "lag_correlation_maps.png"
+OUTPUT_PNG = os.path.join(OUTPUT_DIR, "lag_correlation_maps.png")
+
+os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 # --- Load ---
 precip_daily = xr.open_dataset(PRECIP_PATH).precip
